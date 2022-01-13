@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<h1>Test</h1>
+    <div>{{ mySerie.title }}</div>
+    <div>{{ mySerie.title|raw }}</div>
+    <div>Autre var : {{ autreVar }}</div>
+    {# Crée une variable #}
+    {% set name = 'Fabrice' %}
+    <p>{{ name }}</p>
+
+    {# Crée un tableau #}
+    {% set colors = ['blue', 'pink', 'brown', 'turquoise'] %}
+    {% for color in colors %}
+    <div style="background: {{ color }}">{{ color }} (loop : {{ loop.index }} )</div>
+        {% if loop.last %}
+        Boucle terminée
+        {% endif %}
+    {% endfor %}
+
+    {# Crée un objet #}
+    {% set book = {title : 'Le Twig dans tous ses états', year : '2020', author : 'Moi'} %}
+    <h4>{{ book.title }}</h4>
+    {% for k,v in book %}
+    <p>{{ k }} : {{ v }}</p>
+    {% endfor %}
+
+    {# Filtres #}
+*    <h3>{{ name|length }} lettres dans {{ name|upper }}</h3>
+    <div>Nombre de couleurs : {{ colors|length }}</div>
+    <div>{{ colors|join(' / ') }}</div>
+
+<div>{{ "now"|date('Y') }}</div>
+<div>{{ "+1 year"|date('Y') }}</div>
+{% endblock %}
+
+{% block title %} {{ parent() }} | test {% endblock %}
